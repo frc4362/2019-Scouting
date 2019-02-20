@@ -1,0 +1,12 @@
+.label {
+    -fx-font: 24px "Sans";
+}
+
+.slider .track {
+    -fx-pref-height: 20;
+}
+
+.slider .thumb {
+    -fx-pref-width: 30;
+    -fx-pref-height: 30;
+}
