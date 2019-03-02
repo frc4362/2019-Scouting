@@ -1,10 +1,11 @@
 name := "scoutingapp2019"
 
-version := "1.0"
+version := "1.2.5"
 
 scalaVersion := "2.12.8"
+scalaSource in Compile := baseDirectory.value / "src" / "main" / "scala"
 
-val startingClass = Some("com.gemsrobotics.scouting2019.ScoutingApp")
+val startingClass = Some("com.gemsrobotics.scouting2019.DataScoutingApp")
 
 exportJars := true
 retrieveManaged := true
@@ -13,11 +14,12 @@ mainClass in assembly := startingClass
 
 enablePlugins(JavaFxPlugin)
 
-javaFxMainClass := "com.gemsrobotics.scouting2019.ScoutingApp"
+javaFxMainClass := "com.gemsrobotics.scouting2019.DataScoutingApp"
 
 fork in run := true
 
-assemblyJarName in assembly := "gemscout3.jar"
+fullClasspath in assembly := (fullClasspath in Compile).value
+assemblyJarName in assembly := s"gemscout3v${version.value}.jar"
 
 libraryDependencies ++= Seq(
 	"org.scalafx" %% "scalafx" % "11-R16",
@@ -37,6 +39,6 @@ libraryDependencies ++= javaFXModules.map { m =>
 }
 
 assemblyMergeStrategy in assembly := {
-	case PathList("META-INF", xs @ _*) => MergeStrategy.discard
-	case x => MergeStrategy.first
+	case PathList("META-INF", _ @ _*) => MergeStrategy.discard
+	case _ => MergeStrategy.first
 }

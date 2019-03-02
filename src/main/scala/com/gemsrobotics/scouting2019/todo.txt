@@ -1,3 +1,1 @@
-- add some fields
-- add a save button
 - write a script that will merge CSVs

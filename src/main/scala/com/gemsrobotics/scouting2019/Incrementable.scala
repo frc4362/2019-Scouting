@@ -6,7 +6,7 @@ import scalafx.scene.control.{Button, Label}
 import scalafx.scene.layout.{HBox, VBox}
 import scalafx.scene.text.{Font, FontWeight, TextAlignment}
 
-private class MyButton(text: String) extends Button(text) {
+protected class MyButton(text: String) extends Button(text) {
 	prefWidth = 100
 	prefHeight = 50
 	font = Font("Consolas", FontWeight.Normal, 30)
@@ -36,22 +36,24 @@ class Incrementable(
 		countLabel.text = newValue.toString
 	}
 
-	private val buttons = new HBox {
-		spacing = 10
-		children = Seq(
-			new MyButton("-") {
-				onMouseClicked = { _ =>
-					if (count.value > 0) {
-						count.value -= 1
-					}
-				}
-			},
-			new MyButton("+") {
-				onMouseClicked = { _ =>
-					count.value += 1
+	val btns = Seq(
+		new MyButton("-") {
+			onMouseClicked = { _ =>
+				if (count.value > 0) {
+					count.value -= 1
 				}
 			}
-		)
+		},
+		new MyButton("+") {
+			onMouseClicked = { _ =>
+				count.value += 1
+			}
+		}
+	)
+
+	private val buttons = new HBox {
+		spacing = 10
+		children = btns
 	}
 
 	children = Seq(
